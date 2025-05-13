@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Dashboard{% endblock %}</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide"></script>
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons (UMD build) -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.258.0/dist/umd/lucide.min.js"></script>
+  <!-- Toggle Sidebar JS -->
+  <script src="{{ url_for('static', filename='js/sidebar-toggle.js') }}" defer></script>
+  <!-- Gauge chart logic -->
+  <script src="{{ url_for('static', filename='js/gauge-chart.js') }}" defer></script>
   {% block head %}{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 <body class="flex h-screen bg-[#f4f6f8]">
   {% include 'components/sidebar.html' %}
@@ -20,8 +24,10 @@
       {% block content %}{% endblock %}
     </main>
   </div>
-  <script>document.addEventListener('DOMContentLoaded', () => lucide.replace());</script>
   <!-- Gauge chart logic -->
-  <script src="{{ url_for('static', filename='js/gauge-chart.js') }}"></script>
+  <script>
+    // reemplaza todos los <i data-lucide="..."> por SVGs
+    document.addEventListener('DOMContentLoaded', () => lucide.replace());
+  </script>
 </body>
 </html>

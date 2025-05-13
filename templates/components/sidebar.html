@@ -1,31 +1,31 @@
-<div class="w-20 bg-black flex flex-col items-center py-4">
-    <div class="mb-8 flex flex-col items-center gap-4">
-      <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center">
-        <i data-lucide="RefreshCcw" class="w-4 h-4 text-gray-400"></i>
-      </div>
-      <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
-        <span class="text-black text-xs">?</span>
-      </div>
-    </div>
-    <div class="flex-1 flex flex-col items-center gap-6">
-      <div class="w-10 h-10 rounded-full bg-[#e0dcfe] flex items-center justify-center">
-        <i data-lucide="Grid3x3" class="w-5 h-5 text-[#624bff]"></i>
-      </div>
-      <!-- Botones secundarios -->
-      {% for icon in ['FileText','LayoutDashboard','BarChart3'] %}
-      <button class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-white">
-        <i data-lucide="{{ icon }}" class="w-5 h-5"></i>
-      </button>
-      {% endfor %}
-    </div>
-    <div class="mt-auto flex flex-col items-center gap-6 mb-8">
-      {% for icon in ['Bell','Cog','CircleHelp'] %}
-      <button class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-white">
-        <i data-lucide="{{ icon }}" class="w-5 h-5"></i>
-      </button>
-      {% endfor %}
-    </div>
-    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center overflow-hidden">
-      <i data-lucide="User" class="w-5 h-5 text-white"></i>
-    </div>
+<aside class="w-20 bg-white shadow-md flex flex-col justify-between items-center py-4">
+  <!-- Top Logo -->
+  <div class="mb-6">
+    <img src="{{ url_for('static', filename='external/logoi712-u6gk.svg') }}" alt="Logo" class="w-10 h-auto">
   </div>
+
+  <!-- Navigation Icons -->
+  <nav class="flex flex-col gap-6">
+    <a href="#" class="nav-item active">
+      <img src="{{ url_for('static', filename='external/iconi712-dsie.svg') }}" alt="Dashboard Icon" class="w-6 h-6">
+    </a>
+    <a href="#" class="nav-item">
+      <img src="{{ url_for('static', filename='external/iconi712-s57b.svg') }}" alt="Analytics Icon" class="w-6 h-6">
+    </a>
+    <a href="#" class="nav-item relative">
+      <img src="{{ url_for('static', filename='external/iconi712-uy4i.svg') }}" alt="Messages Icon" class="w-6 h-6">
+      <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+    </a>
+    <a href="#" class="nav-item">
+      <img src="{{ url_for('static', filename='external/iconi712-ncy6.svg') }}" alt="Tasks Icon" class="w-6 h-6">
+    </a>
+    <a href="#" class="nav-item">
+      <img src="{{ url_for('static', filename='external/iconi712-g35p.svg') }}" alt="Settings Icon" class="w-6 h-6">
+    </a>
+  </nav>
+
+  <!-- Footer Avatar -->
+  <div class="mt-6">
+    <img src="{{ url_for('static', filename='external/imagei712-9ahr-200h.png') }}" alt="User Avatar" class="w-10 h-10 rounded-full">
+  </div>
+</aside>
