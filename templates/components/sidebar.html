@@ -1,31 +1,134 @@
-<aside class="w-20 bg-white shadow-md flex flex-col justify-between items-center py-4">
-  <!-- Top Logo -->
-  <div class="mb-6">
-    <img src="{{ url_for('static', filename='external/logoi712-u6gk.svg') }}" alt="Logo" class="w-10 h-auto">
+<!-- Flask Sidebar Component with Toggle Functionality -->
+<aside id="sidebar" class="bg-gray-900 text-gray-300 h-screen transition-all duration-300 ease-in-out" :class="isExpanded ? 'w-64' : 'w-20'">
+  <!-- Top Logo and Brand -->
+  <div class="p-4 flex items-center gap-3">
+      <div class="bg-indigo-600 rounded-full p-2 flex-shrink-0">
+          <img src="{{ url_for('static', filename='external/Logo.png') }}" alt="Heaven Regalias" class="w-6 h-6">
+      </div>
+      <span class="text-white font-medium transition-opacity duration-300" :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden md:block'">Heaven Regalias</span>
+      
+      <!-- Toggle Button -->
+      <button @click="toggleSidebar" class="ml-auto text-gray-400 hover:text-white focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" :class="isExpanded ? 'rotate-0' : 'rotate-180'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+          </svg>
+      </button>
   </div>
-
-  <!-- Navigation Icons -->
-  <nav class="flex flex-col gap-6">
-    <a href="#" class="nav-item active">
-      <img src="{{ url_for('static', filename='external/iconi712-dsie.svg') }}" alt="Dashboard Icon" class="w-6 h-6">
-    </a>
-    <a href="#" class="nav-item">
-      <img src="{{ url_for('static', filename='external/iconi712-s57b.svg') }}" alt="Analytics Icon" class="w-6 h-6">
-    </a>
-    <a href="#" class="nav-item relative">
-      <img src="{{ url_for('static', filename='external/iconi712-uy4i.svg') }}" alt="Messages Icon" class="w-6 h-6">
-      <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-    </a>
-    <a href="#" class="nav-item">
-      <img src="{{ url_for('static', filename='external/iconi712-ncy6.svg') }}" alt="Tasks Icon" class="w-6 h-6">
-    </a>
-    <a href="#" class="nav-item">
-      <img src="{{ url_for('static', filename='external/iconi712-g35p.svg') }}" alt="Settings Icon" class="w-6 h-6">
-    </a>
+  
+  <!-- Navigation Menu -->
+  <nav class="flex-1 mt-4">
+      <ul class="space-y-1">
+          <!-- Dashboard -->
+          <li>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg mx-2" :class="isExpanded ? 'bg-gray-800 text-white' : 'justify-center hover:bg-gray-800'">
+                  <span class="text-indigo-400 flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                      </svg>
+                  </span>
+                  <span class="whitespace-nowrap transition-opacity duration-300" :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden md:block'">Dashboard</span>
+              </a>
+          </li>
+          
+          <!-- Reportes Resumidos Mensuales -->
+          <li>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg mx-2" :class="isExpanded ? 'hover:bg-gray-800' : 'justify-center hover:bg-gray-800'">
+                  <span class="flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd" />
+                      </svg>
+                  </span>
+                  <span class="whitespace-nowrap transition-opacity duration-300" :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden md:block'">Reportes Resumidos Mensuales</span>
+              </a>
+          </li>
+          
+          <!-- Reportes Resumidos por Periodo -->
+          <li>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg mx-2" :class="isExpanded ? 'hover:bg-gray-800' : 'justify-center hover:bg-gray-800'">
+                  <span class="flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm6 2a1 1 0 10-2 0v1H7a1 1 0 100 2h2v1a1 1 0 102 0v-1h2a1 1 0 100-2h-2V6z" clip-rule="evenodd" />
+                      </svg>
+                  </span>
+                  <span class="whitespace-nowrap transition-opacity duration-300" :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden md:block'">Reportes Resumidos por Periodo</span>
+              </a>
+          </li>
+          
+          <!-- Reportes Detallados por mes -->
+          <li>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg mx-2" :class="isExpanded ? 'hover:bg-gray-800' : 'justify-center hover:bg-gray-800'">
+                  <span class="flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                      </svg>
+                  </span>
+                  <span class="whitespace-nowrap transition-opacity duration-300" :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden md:block'">Reportes Detallados por mes</span>
+              </a>
+          </li>
+          
+          <!-- Reportes Detallados por Periodo -->
+          <li>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg mx-2" :class="isExpanded ? 'hover:bg-gray-800' : 'justify-center hover:bg-gray-800'">
+                  <span class="flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z" clip-rule="evenodd" />
+                      </svg>
+                  </span>
+                  <span class="whitespace-nowrap transition-opacity duration-300" :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden md:block'">Reportes Detallados por Periodo</span>
+              </a>
+          </li>
+          
+          <!-- Notifications -->
+          <li class="mt-6">
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg mx-2" :class="isExpanded ? 'hover:bg-gray-800' : 'justify-center hover:bg-gray-800'">
+                  <span class="text-pink-500 flex-shrink-0 relative">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                      </svg>
+                      <!-- Notification dot -->
+                      <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                  </span>
+                  <span class="whitespace-nowrap transition-opacity duration-300" :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden md:block'">Notificaciones</span>
+              </a>
+          </li>
+          
+          <!-- Help -->
+          <li>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg mx-2" :class="isExpanded ? 'hover:bg-gray-800' : 'justify-center hover:bg-gray-800'">
+                  <span class="flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                      </svg>
+                  </span>
+                  <span class="whitespace-nowrap transition-opacity duration-300" :class="isExpanded ? 'opacity-100' : 'opacity-0 hidden md:block'">Ayuda</span>
+              </a>
+          </li>
+      </ul>
   </nav>
+  
+  <!-- Footer -->
+  <div class="border-t border-gray-700 p-4" :class="isExpanded ? '' : 'flex justify-center'">
+      <!-- Logout Button - Only visible when expanded -->
+      <a href="#" class="flex items-center justify-between text-sm text-gray-400 hover:text-white mb-4" :class="isExpanded ? '' : 'hidden'">
+          <span>Salir de la sesión</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+      </a>
+      
+      <!-- User Info -->
+      <div :class="isExpanded ? 'flex items-center gap-3' : 'flex justify-center'">
+          <div class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center overflow-hidden">
+            <!--              
+              <img src="#" alt="User" class="w-8 h-8 rounded-full object-cover" onerror="this.src='{{ url_for('static', filename='external/default-avatar.png') }}'">
+            -->
+              <img src="#" alt="User" class="w-8 h-8 rounded-full object-cover">
 
-  <!-- Footer Avatar -->
-  <div class="mt-6">
-    <img src="{{ url_for('static', filename='external/imagei712-9ahr-200h.png') }}" alt="User Avatar" class="w-10 h-10 rounded-full">
+          </div>
+          <div :class="isExpanded ? 'block' : 'hidden'">
+              <p class="text-sm font-medium text-white">Welcome back 👋</p>
+              <p class="text-xs text-gray-400">Johnathon</p>
+          </div>
+      </div>
   </div>
 </aside>
