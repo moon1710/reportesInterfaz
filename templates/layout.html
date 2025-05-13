@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}Dashboard{% endblock %}</title>
+  <link rel="icon" href="/static/external/Logo.png">
+  <title>{% block title %}Reportes{% endblock %}</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons (UMD build) -->
@@ -11,9 +12,7 @@
   <!-- Toggle Sidebar JS -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <!-- Gauge chart logic -->
-  <script src="{{ url_for('static', filename='../static/js/sidebar.js') }}" defer></script>
   {% block head %}{% endblock %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 <body class="flex h-screen bg-[#f4f6f8]">
@@ -29,5 +28,6 @@
     // reemplaza todos los <i data-lucide="..."> por SVGs
     document.addEventListener('DOMContentLoaded', () => lucide.replace());
   </script>
+  <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
 </body>
 </html>
